@@ -49,7 +49,7 @@ args.save_image = True
 args.signed = not args.unsigned  # 此处signed为True,梯度方向可以取0~360
 
 # Parse training strategy
-# 两种优化方法，conservative（保守？传统）对应SGD，另外一种对应adam。不确定那种效果好些，若效果不好可以考虑来这里做些改变
+# 两种优化方法，conservative对应SGD，另外一种对应adam。不确定那种效果好些，若效果不好可以考虑来这里做些改变
 # defs = inversefed.training_strategy('conservative')  # or adam
 defs = inversefed.training_strategy('adam')
 defs.epochs = args.epochs
@@ -221,7 +221,7 @@ if __name__ == "__main__":
     config_comp['local_lr'] = args.trained_model
     config_comp['target_id'] = args.target_id
     config_hash = hashlib.md5(json.dumps(config_comp, sort_keys=True).encode()).hexdigest()
-    # config_hash 用来干嘛？ 区分特定配置下的运行结果？Yes
+  
     print(config_comp)
     # 检查或者创建存储路径，以配置超参数的md5值命名，所以相同参数会覆盖掉之前的结果1
     os.makedirs(args.table_path, exist_ok=True)
